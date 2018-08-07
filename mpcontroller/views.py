@@ -26,7 +26,7 @@ def updateMac(request):
             free_muse.used = False
             free_muse.save()
             raspb.connected_muse = None
-            c = liblo.Message('/change-mac', 'disconnected')
+            c = liblo.Message('/change_mac', 'disconnected')
             outputAddress = liblo.Address(raspb.ip, 6001)
             liblo.send(outputAddress, c)
         else:
@@ -34,8 +34,17 @@ def updateMac(request):
             raspb.connected_muse = muse
             muse.used = True
             muse.save()
-            c = liblo.Message('/change-mac', raspb.connected_muse.mac_address)
+            c = liblo.Message('/change_mac', raspb.connected_muse.mac_address)
             outputAddress = liblo.Address(raspb.ip, 6001)
             liblo.send(outputAddress, c)
         raspb.save()
     return HttpResponseRedirect('/')
+
+def addDevice(request):
+    if request.method == 'POST':
+        if request.POST['device-type'] == 'muse':
+            new_muse = muse_device.objects.create(name = request.POST['device-name'], mac_address=request.POST['mac-address'])
+            new_muse.save()
+        else:
+            new_pi = rasp_device.objects.create(name = request.POST['device-name'], mac_address=request.POST['mac-address'])
+            new_pi.save()

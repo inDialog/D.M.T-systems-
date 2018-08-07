@@ -47,11 +47,8 @@
                                     <select class="form-control" name="muse-mac">
                                         <option>{{rasp.connected_muse.mac_address}}</option>
                                         {% for muse in muse_devices %} {% if rasp.connected_muse.mac_address != muse.mac_address %}
-                                        <option {% if muse.used %}
-                                                disabled
-                                                {% endif %}
-                                                >
-                                                {{ muse.mac_address}}
+                                        <option {% if muse.used %} disabled {% endif %}>
+                                            {{ muse.mac_address}}
                                         </option>
                                         {% else %}
                                         <option></option>
@@ -70,6 +67,42 @@
 
                     </tbody>
                 </table>
+                <div class="container">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h2>Device List</h2>
+                            <ul>
+                            {% for rasp in rasp_devices %}
+                                <li>{{rasp.name}} - Raspberry</li>
+                            {% endfor %}
+                            {% for muse in muse_devices %}
+                                <li>{{muse.name}} - Muse</li>
+                            {% endfor %}
+                            </ul>
+                        </div>
+                        <div class="col-md-6">
+                            <h2>Add Device</h2>
+                            <form action="/add-device" method="post">
+                                <div class="form-group">
+                                    <label>Select Device:</label>
+                                    <select name="device-type" class="form-control">
+                                        <option value="muse">Muse</option>
+                                        <option value="pi">Raspberry Pi</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Name</label>
+                                    <input type="text" name="device-name" class="form-control">
+                                </div>
+                                <div class="form-group">
+                                    <label>MAC Address</label>
+                                    <input type="text" name="mac-address" class="form-control">
+                                </div>
+                                <button class="btn">Submit</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

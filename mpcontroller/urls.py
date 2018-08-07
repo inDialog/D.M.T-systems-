@@ -4,4 +4,5 @@ from . import views
 urlpatterns = [
     path('', views.index, name='index'),
     path('update-mac', views.updateMac, name='updateMac'),
+    path('add-device', views.addDevice, name='addDevice'),
 ]
