@@ -24,6 +24,7 @@
                             <th>Test</th>
                             <th scope="col">Raspberry Name</th>
                             <th scope="col">Raspberry MAC</th>
+                            <th scope="col">Raspberry IP</th>
                             <th scope="col">Muse Mac</th>
                             <th scope="col">Update</th>
                         </tr>
@@ -41,6 +42,7 @@
                                 </td>
                                 <td>{{rasp.name}}</td>
                                 <td>{{rasp.mac_address}}</td>
+                                <td>{{rasp.ip}}</td>
                                 <td>
                                     <select class="form-control" name="muse-mac">
                                         <option>{{rasp.connected_muse.mac_address}}</option>

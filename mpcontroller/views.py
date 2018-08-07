@@ -8,6 +8,7 @@ from django.views.decorators.csrf import csrf_exempt
 from django.http import HttpResponse, HttpResponseRedirect
 
 from mpcontroller.models import muse_device, rasp_device
+import liblo
 
 def index(request):
     muse_devices = muse_device.objects.all()
@@ -25,11 +26,16 @@ def updateMac(request):
             free_muse.used = False
             free_muse.save()
             raspb.connected_muse = None
+            c = liblo.Message('/change-mac', 'disconnected')
+            outputAddress = liblo.Address(raspb.ip, 6001)
+            liblo.send(outputAddress, c)
         else:
             muse = muse_device.objects.get(mac_address=mac_muse)
             raspb.connected_muse = muse
             muse.used = True
             muse.save()
+            c = liblo.Message('/change-mac', raspb.connected_muse.mac_address)
+            outputAddress = liblo.Address(raspb.ip, 6001)
+            liblo.send(outputAddress, c)
         raspb.save()
-        
     return HttpResponseRedirect('/')

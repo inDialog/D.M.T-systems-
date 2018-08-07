@@ -4,7 +4,6 @@ from mpcontroller.models import muse_device, rasp_device
 
 class RaspSerializer(serializers.Serializer):
     mac = serializers.CharField(required=False, allow_blank=True, max_length=24)
-    ip = serializers.CharField(required=False, allow_blank=True, max_length=24)
     status = serializers.CharField(required=False, allow_blank=True, max_length=24)
 
     def create(self, validated_data):

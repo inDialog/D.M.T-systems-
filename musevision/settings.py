@@ -25,7 +25,7 @@ SECRET_KEY = '!yj^=j8tl9ton-0g-cp4b=dl3oyt51go0ljo2)6f-+7vq#ote8'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -40,6 +40,7 @@ INSTALLED_APPS = [
     'django_extensions',
     'rest_framework',
     'coreapi',
+    'liblo',
     'mpcontroller',
     'core_api',
 ]
