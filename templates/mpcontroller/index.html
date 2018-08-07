@@ -43,9 +43,14 @@
                                 <td>{{rasp.mac_address}}</td>
                                 <td>
                                     <select class="form-control" name="muse-mac">
-                                        <option>{{rasp.connected_muse.MAC_address}}</option>
-                                        {% for muse in muse_devices %} {% if rasp.connected_muse.MAC_address != muse.MAC_address %}
-                                        <option>{{ muse.MAC_address}}</option>
+                                        <option>{{rasp.connected_muse.mac_address}}</option>
+                                        {% for muse in muse_devices %} {% if rasp.connected_muse.mac_address != muse.mac_address %}
+                                        <option {% if muse.used %}
+                                                disabled
+                                                {% endif %}
+                                                >
+                                                {{ muse.mac_address}}
+                                        </option>
                                         {% else %}
                                         <option></option>
                                         {% endif %} {% endfor %}

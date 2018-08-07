@@ -6,7 +6,7 @@ from django.db import models
 # Create your models here.
 
 class muse_device(models.Model):
-    MAC_address = models.CharField(max_length=18, null=True, blank=True)
+    mac_address = models.CharField(max_length=18, null=True, blank=True)
     used = models.BooleanField(default=False)
 
 class rasp_device(models.Model):

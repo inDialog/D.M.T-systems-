@@ -17,9 +17,15 @@ from django.conf.urls import url
 from django.urls import include, path
 from django.contrib import admin
 
+from rest_framework.documentation import include_docs_urls
+
+from core_api import views
+
 
 urlpatterns = [
     path('', include('mpcontroller.urls')),
     url(r'^/', include('rest_framework.urls')),
+    url(r'^docs/', include_docs_urls(title='DMT API', description='RESTful API for Muse/Pi Management')),
+    url(r'^api/', include('core_api.urls')),
     url(r'^admin/', admin.site.urls),
 ]
