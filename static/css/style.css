@@ -1,0 +1,36 @@
+body{
+    color: white;
+    background: black;
+}
+
+.table .thead-light th {
+    color: black;
+}
+
+span.glyphicon {
+    font-size: 10px;
+}
+
+.status-icon{
+    color: black;
+}
+
+.header-tower {
+    color: black;
+}
+
+
+.active-connection {
+    color: greenyellow;
+}
+
+.update-btn {
+    border-radius: 0;
+    display: block;
+    background: black;
+}
+
+i.fas.fa-spinner {
+    background: black;
+    color: white;
+}

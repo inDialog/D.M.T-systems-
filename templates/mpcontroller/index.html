@@ -1,0 +1,71 @@
+{% load static %}
+<html>
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="{% static 'css/bootstrap.min.css' %}">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.2.0/css/all.css" integrity="sha384-hWVjflwFxL6sNzntih27bfxkr27PmbbK/iSvJ+a4+0owXq79v+lsFkW54bOGbiDQ"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <script src="{% static 'js/bootstrap.min.js' %}"></script>
+</head>
+
+<body>
+    <div class="container">
+        <h1>Dashboard</h1>
+        <div class="container">
+            <div class="row">
+                <table class="table">
+                    <thead class="thead-light">
+                        <tr>
+                            <th scope="col">
+                                Signal Health
+                            </th>
+                            <th>Test</th>
+                            <th scope="col">Raspberry Name</th>
+                            <th scope="col">Raspberry MAC</th>
+                            <th scope="col">Muse Mac</th>
+                            <th scope="col">Update</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        {% for rasp in rasp_devices %}
+                        <tr>
+                            <form action="/update-mac" method="post">
+                                {% csrf_token %}
+                                <th scope="row">
+                                    <i class="fas fa-broadcast-tower"></i>
+                                </th>
+                                <td scope="row">
+                                    <i class="far fa-circle"></i>
+                                </td>
+                                <td>{{rasp.name}}</td>
+                                <td>{{rasp.mac_address}}</td>
+                                <td>
+                                    <select class="form-control" name="muse-mac">
+                                        <option>{{rasp.connected_muse.MAC_address}}</option>
+                                        {% for muse in muse_devices %} {% if rasp.connected_muse.MAC_address != muse.MAC_address %}
+                                        <option>{{ muse.MAC_address}}</option>
+                                        {% else %}
+                                        <option></option>
+                                        {% endif %} {% endfor %}
+                                    </select>
+                                </td>
+                                <input type="text" hidden name="raspberry-mac" value="{{rasp.mac_address}}">
+                                <td>
+                                    <button class="btn update-btn" type="submit">
+                                        <i class="fas fa-spinner"></i>
+                                    </button>
+                                </td>
+                            </form>
+                        </tr>
+                        {% endfor %}
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
