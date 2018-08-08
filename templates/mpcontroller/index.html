@@ -24,7 +24,7 @@
                             <th scope="col">Raspberry Name</th>
                             <th scope="col">Raspberry MAC</th>
                             <th scope="col">Raspberry IP</th>
-                            <th scope="col">Muse Mac</th>
+                            <th scope="col">Muse</th>
                             <th scope="col">Update</th>
                         </tr>
                     </thead>
@@ -44,10 +44,10 @@
                                 <td>{{rasp.ip}}</td>
                                 <td>
                                     <select class="form-control" name="muse-mac">
-                                        <option>{{rasp.connected_muse.mac_address}}</option>
+                                        <option value="{{rasp.connected_muse.mac_address}}">{{rasp.connected_muse.name}}</option>
                                         {% for muse in muse_devices %} {% if rasp.connected_muse.mac_address != muse.mac_address %}
-                                        <option {% if muse.used %} disabled {% endif %}>
-                                            {{ muse.mac_address}}
+                                        <option {% if muse.used %} disabled {% endif %} value="{{ muse.mac_address}}">
+                                            {{ muse.name}}
                                         </option>
                                         {% else %}
                                         <option></option>
@@ -75,7 +75,7 @@
                                 <li>{{rasp.name}} - Raspberry</li>
                             {% endfor %}
                             {% for muse in muse_devices %}
-                                <li>{{muse.name}} - Muse</li>
+                                <li>{{muse.name}} - {{muse.mac_address}} - Muse</li>
                             {% endfor %}
                             </ul>
                         </div>

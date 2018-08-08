@@ -28,6 +28,7 @@ def updateMac(request):
                 free_muse.save()
             raspb.connected_muse = None
             if raspb.ip != None:
+                print("sending message to disconnect")
                 c = liblo.Message('/change_mac', 'disconnected')
                 outputAddress = liblo.Address(raspb.ip, 6001)
                 liblo.send(outputAddress, c)
@@ -41,6 +42,7 @@ def updateMac(request):
             muse.used = True
             muse.save()
             if raspb.ip != None:
+                print("sending message")
                 c = liblo.Message('/change_mac', raspb.connected_muse.mac_address)
                 outputAddress = liblo.Address(raspb.ip, 6001)
                 liblo.send(outputAddress, c)
