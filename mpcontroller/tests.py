@@ -16,8 +16,8 @@ def create_pi(mac, name, ip, muse_mac):
     new_pi = rasp_device.objects.create(name = name, mac_address=mac, ip=ip, connected_muse = muse)
     new_pi.save()
 
-muse_data[['','Tale of Us'],['','Recondite'],['','Hardwell'],['','Len Faki'],['','Plastikman'],['','Nina'],['','Villalobos']]
-pi_data[['','Pink Floyd',''],['','The Beatles',''],['','Hendrix',''],['','Jethro Tull',''],['','Cobain',''],['','Nirvana',''],['','Police','']]
+muse_data=[['00:55:DA:B3:94:D9','Tale of Us']]#,['','Recondite'],['','Hardwell'],['','Len Faki'],['','Plastikman'],['','Nina'],['','Villalobos']]
+pi_data=[['B8:27:EB:74:F9:40','Pink Floyd','192.168.0.110']]#,['','The Beatles',''],['','Hendrix',''],['','Jethro Tull',''],['','Cobain',''],['','Nirvana',''],['','Police','']]
 
 for current_muse in muse_data:
         create_muse(current_muse[0], current_muse[1])
