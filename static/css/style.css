@@ -38,3 +38,7 @@ i.fas.fa-spinner {
 ul {
     list-style-type: none;
   }
+
+  .green {
+      color: green;
+  }

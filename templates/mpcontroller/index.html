@@ -37,7 +37,7 @@
                                     <i class="fas fa-broadcast-tower"></i>
                                 </th>
                                 <td scope="row">
-                                    <i class="far fa-circle"></i>
+                                    <i class="far fa-circle" id="a{{rasp.connected_muse.mac_address|slice:":2"}}{{rasp.connected_muse.mac_address|slice:"3:5"}}{{rasp.connected_muse.mac_address|slice:"6:8"}}{{rasp.connected_muse.mac_address|slice:"9:11"}}{{rasp.connected_muse.mac_address|slice:"12:14"}}{{rasp.connected_muse.mac_address|slice:"15:17"}}"></i>
                                 </td>
                                 <td>{{rasp.name}}</td>
                                 <td>{{rasp.mac_address}}</td>
@@ -129,6 +129,23 @@
     socket.on('shake', function (msg) {
         var message = 'Muse ' + msg.mac + ' is ' + msg.data
         $('#messages').append($('<li>').text(message));
+        msg.mac = msg.mac.replace(':','');
+        msg.mac = msg.mac.replace(':','');
+        msg.mac = msg.mac.replace(':','');
+        msg.mac = msg.mac.replace(':','');
+        msg.mac = msg.mac.replace(':','');
+        msg.mac = msg.mac.replace(':','');
+        msg.mac = msg.mac.replace(':','');
+        mac_id = '#a' + msg.mac
+        $(mac_id).addClass('fas')
+        $(mac_id).addClass('green')
+        $(mac_id).removeClass('far')
+        console.log(mac_id)
+        setTimeout(function(){ 
+            $(mac_id).addClass('far')
+            $(mac_id).removeClass('green')
+            $(mac_id).removeClass('fas')
+         }, 1500);
     });
 
 </script>
