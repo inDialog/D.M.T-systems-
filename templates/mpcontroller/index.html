@@ -71,12 +71,11 @@
                         <div class="col-md-6">
                             <h2>Device List</h2>
                             <ul>
-                            {% for rasp in rasp_devices %}
+                                {% for rasp in rasp_devices %}
                                 <li>{{rasp.name}} - Raspberry</li>
-                            {% endfor %}
-                            {% for muse in muse_devices %}
+                                {% endfor %} {% for muse in muse_devices %}
                                 <li>{{muse.name}} - {{muse.mac_address}} - Muse</li>
-                            {% endfor %}
+                                {% endfor %}
                             </ul>
                         </div>
                         <div class="col-md-6">
@@ -106,36 +105,32 @@
             </div>
         </div>
     </div>
-    <ul id="messages"></ul>
+    <div class="container">
+        <h2>Live Status</h2>
+        <ul id="messages"></ul>
+    </div>
 </body>
 <script src="{% static 'js/socket.io.js' %}"></script>
-<script src="https://code.jquery.com/jquery-1.11.1.js"></script>
+<script src="{% static 'js/jquery.js' %}"></script>
 <script>
-  const socket = io('http://localhost:8100');
+    var local = 'http://0.0.0.0:8100'
+    var installation_router = 'http://192.168.0.146:8100'
+    const socket = io.connect(installation_router);
 
-  socket.on('shake', function (data) {
-    console.log(data);
-  });
+    socket.on('connect', function () {
+        $('#messages').append($('<li>').text('Successfully connected to server'));
+        socket.emit('shaking', { 'data': 'connected' });
+    });
 
-  socket.on('connect', function() {
-    console.log('connection happening');
-    socket.emit('my_event', {data: 'I\'m connected!'});
-});
+    socket.on('disconnect', function (socket) {
+        $('#messages').append($('<li>').text('Connection interrupted'));
+    });
 
-  socket.on('disconnect', function(socket) {
-    console.log('you have been disconnected');
-  });
-
-  socket.on('status', function(message){
-    $('#messages').append($('<li>').text(message));
-  });
-
-  socket.on('my_response', function(msg) {
-    $('#messages').append($('<li>').text(message.data));
-});
-
-
-
+    socket.on('shake', function (msg) {
+        var message = 'Muse ' + msg.mac + ' is ' + msg.data
+        $('#messages').append($('<li>').text(message));
+    });
 
 </script>
+
 </html>

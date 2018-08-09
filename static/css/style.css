@@ -34,3 +34,7 @@ i.fas.fa-spinner {
     background: black;
     color: white;
 }
+
+ul {
+    list-style-type: none;
+  }
