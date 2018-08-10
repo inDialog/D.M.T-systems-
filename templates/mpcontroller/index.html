@@ -119,16 +119,19 @@
 
     socket.on('connect', function () {
         $('#messages').append($('<li>').text('Successfully connected to server'));
-        socket.emit('shaking', { 'data': 'connected' });
+        // socket.emit('shaking', { 'data': 'connected' }); // for testing purposes
     });
 
     socket.on('disconnect', function (socket) {
         $('#messages').append($('<li>').text('Connection interrupted'));
     });
 
-    socket.on('shake', function (msg) {
+    socket.on('connected-muse', function(msg){
         var message = 'Muse ' + msg.mac + ' is ' + msg.data
         $('#messages').append($('<li>').text(message));
+    })
+
+    socket.on('shake', function (msg) {
         msg.mac = msg.mac.replace(':','');
         msg.mac = msg.mac.replace(':','');
         msg.mac = msg.mac.replace(':','');
@@ -140,7 +143,6 @@
         $(mac_id).addClass('fas')
         $(mac_id).addClass('green')
         $(mac_id).removeClass('far')
-        console.log(mac_id)
         setTimeout(function(){ 
             $(mac_id).addClass('far')
             $(mac_id).removeClass('green')
